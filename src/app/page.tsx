@@ -6,6 +6,10 @@ import { useInterval } from "./components/utils";
 import { Pomodoro } from "@/app/components/pomodoro/pomodoro";
 
 export default function Home() {
+  
+  
+
+
   const [timer, setTimer] = useState<TimerInstance>({
     tag: "Timer",
     second: 0,
