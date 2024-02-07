@@ -6,7 +6,7 @@ import { notify } from "../Notification";
 import { useInterval } from "../utils";
 
 export type TimerInstance = {
-  tag: string;
+  text: string;
   hour: number;
   minute: number;
   second: number;
@@ -17,7 +17,7 @@ type TimerProps = {
   timer: TimerInstance
 }
 export const Timer = (timerProps: TimerProps) => {
-  const [timer, setTimer] = useState<TimerInstance>({expired: false, hour:0,minute:0,notified:false,second:0,tag:"Hello"})
+  const [timer, setTimer] = useState<TimerInstance>({expired: false, hour:0,minute:0,notified:false,second:0,text:"Hello"})
   function updateTimer(): void {
     if (timer.expired) {
       if (!timer.notified) {

@@ -1,23 +1,34 @@
 import { useState } from "react"
 import { Timer, TimerInstance } from "./timer"
 import { TimerButtons } from "./TimerButtons"
+import { QueryClient, useQuery, QueryClientProvider } from "@tanstack/react-query"
+import axios from "axios"
 
-async function TimerList() {
-    const {data} = useQuery({
-        
-    })
-    const res = await fetch("http://localhost:8080/timer/eue",{ cache: 'no-store' })
-    if(!res.ok) {
-        throw new Error('Failed to fetch data')
+ const TimerList = () => {
+    const fetchTimer = async () => {
+        console.log("Fetching timers")
+        const response = await axios.get("http://localhost:8080/timer/eue")
+        return response.data
     }
+
+
+    const query =useQuery<TimerInstance[]>({
+        queryKey: ['id'],
+        queryFn: fetchTimer,
+    })
+
+
     return (
-        <div>
-        <ul>
-            {res.json().then(value => value.map(entry =>(
-                <li key={entry.text}>{entry.text}</li>
-            ))).catch(error => console.log(error))}
-        </ul>
-        </div> )
+        
+
+            <div>
+                <ul>
+                    {query.data?.map((entry) =>(
+                        <li key={entry.text}>{entry.text}</li>
+                    ))}
+                 </ul>
+            </div>
+        )
   }
 
 export const Pomodoro = () => {
@@ -33,16 +44,20 @@ export const Pomodoro = () => {
 
     const workButtonHandler = () => {
         console.log("Work button")
-    } 
+    }
 
     return  (
     <div>
         <Timer timer={timer}/>
-        <TimerButtons breakButtonHandler = {breakButtonHandler} 
+        <TimerButtons breakButtonHandler = {breakButtonHandler}
                         longBreakButtonHandler={longBreakButtonHandler}
                         workButtonHandler={workButtonHandler}/>
-        <TimerList />                
-        
+                        <QueryClientProvider client={new QueryClient()}>
+
+            <TimerList />
+            </QueryClientProvider> 
+
+
     </div>
     )
 
