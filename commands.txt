@@ -8,3 +8,34 @@ which default to text/plain and application/octet-stream respectively).
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Timer findTimer(String id)
+
+******************************************tanstack*********************
+import ky from 'ky'
+import { useQuery } from '@tanstack/react-query'
+
+const fetchPosts = async (limit = 10) => {
+  const parsed = await ky('https://jsonplaceholder.typicode.com/posts').json()
+  return parsed.filter((x) => x.id <= limit)
+}
+
+const usePosts = (limit) => {
+  return useQuery({
+    queryKey: ['posts', limit],
+    queryFn: () => fetchPosts(limit),
+  })
+}
+
+export { usePosts, fetchPosts }
+https://github.com/TanStack/query/blob/main/examples/react/nextjs/src/hooks/usePosts/index.js
+********************************************************************************
+
+axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });

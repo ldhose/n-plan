@@ -3,38 +3,14 @@ import { Timer, TimerInstance } from "./timer"
 import { TimerButtons } from "./TimerButtons"
 import { QueryClient, useQuery, QueryClientProvider } from "@tanstack/react-query"
 import axios from "axios"
+import { TimerList } from "./TimerList"
 
- const TimerList = () => {
-    const fetchTimer = async () => {
-        console.log("Fetching timers")
-        const response = await axios.get("http://localhost:8080/timer/eue")
-        return response.data
-    }
-
-
-    const query =useQuery<TimerInstance[]>({
-        queryKey: ['id'],
-        queryFn: fetchTimer,
-    })
-
-
-    return (
-        
-
-            <div>
-                <ul>
-                    {query.data?.map((entry) =>(
-                        <li key={entry.text}>{entry.text}</li>
-                    ))}
-                 </ul>
-            </div>
-        )
-  }
 
 export const Pomodoro = () => {
-    const [timer, setTimer] = useState<TimerInstance>({hour:0, expired:false,minute:0, notified:false,second:0,tag:"hello"})
+    const [timer, setTimer] = useState<TimerInstance>({hour:0, expired:false,minute:0, notified:false,second:0,text:"hello"})
 
-    const breakButtonHandler = () => {
+    const breakButtonHandler = async () => {
+        const getResult = await fetch("app/api/route.ts")
         console.log("Short button pressed")
     }
 
@@ -52,9 +28,9 @@ export const Pomodoro = () => {
         <TimerButtons breakButtonHandler = {breakButtonHandler}
                         longBreakButtonHandler={longBreakButtonHandler}
                         workButtonHandler={workButtonHandler}/>
-                        <QueryClientProvider client={new QueryClient()}>
+            <QueryClientProvider client={new QueryClient()}>
 
-            <TimerList />
+            {/* <TimerList /> */}
             </QueryClientProvider> 
 
 
