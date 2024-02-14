@@ -5,7 +5,7 @@ import { TimerInstance } from "./timer"
 export const TimerList = () => {
     const fetchTimer = async () => {
         console.log("Fetching timers")
-        const response = await axios.get("http://localhost:8080/timer/eue")
+        const response = await axios.get("http://localhost:8080/timer/findAll")
         return response.data
     }
 
@@ -17,12 +17,10 @@ export const TimerList = () => {
 
 
     return (
-        
-
             <div>
                 <ul>
-                    {query.data?.map((entry) =>(
-                        <li key={entry.text}>{entry.text}</li>
+                    {query.data?.map((entry: TimerInstance) =>(
+                        <li key={entry.id}>{entry.text}</li>
                     ))}
                  </ul>
             </div>
