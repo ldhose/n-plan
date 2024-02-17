@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
-import { Timer, TimerInstance } from "./components/pomodoro/timer";
+import { Timer } from "./components/pomodoro/timer";
 import { useRef, useState } from "react";
 import { useInterval } from "./components/utils";
 import { Pomodoro } from "@/app/components/pomodoro/pomodoro";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TimerList } from "./components/pomodoro/TimerList";
+import { TimerInstance } from "./lib/timer";
 
 export default function Home() {
   

@@ -1,6 +1,6 @@
+import { TimerInstance } from "@/app/lib/timer"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-import { TimerInstance } from "./timer"
 
 export const TimerList = () => {
     const fetchTimer = async () => {
