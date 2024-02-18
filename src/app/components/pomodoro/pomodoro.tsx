@@ -6,7 +6,7 @@ import { QueryClient, useQuery, QueryClientProvider } from "@tanstack/react-quer
 import axios from "axios"
 import { TimerList } from "./TimerList"
 import { TimerInstance } from "@/app/lib/timer"
-import { PomodoroContext } from "../contexts/pomodoroContext"
+import  PomodoroContextProvider from "../contexts/pomodoroContext"
 
 
 
@@ -43,13 +43,13 @@ export const Pomodoro = () => {
 
     return  (
     <div>
-        <PomodoroContext.Provider value={timer}>
+        <PomodoroContextProvider>
             <Timer />
             <TimerButtons breakButtonHandler = {breakButtonHandler}
                         longBreakButtonHandler={longBreakButtonHandler}
                         workButtonHandler={workButtonHandler}
                         testButton={testButton}/>
-        </PomodoroContext.Provider>
+        </PomodoroContextProvider>
 
     </div>
     )

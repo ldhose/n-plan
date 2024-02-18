@@ -6,13 +6,13 @@ import { usePomodoroContext } from "../contexts/pomodoroContext";
 
 export const Timer = () => {
   
-  const timer = usePomodoroContext();
+  const {timer, setTimer} = usePomodoroContext();
 
   useEffect(() => {
     if (timer !== null) {
       let id = setInterval(() =>{
         if(timer.remainingSeconds >0 ) {
-          timer.remainingSeconds = timer.remainingSeconds - 1
+          setTimer({...timer, remainingSeconds: timer.remainingSeconds - 1})
         }
         else if(!timer.notified) {
         // const audio = new Audio("/timer-sound.mp3")
