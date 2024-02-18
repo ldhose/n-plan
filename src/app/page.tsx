@@ -2,11 +2,11 @@
 import Image from "next/image";
 import { Timer } from "./components/pomodoro/timer";
 import { useRef, useState } from "react";
-import { useInterval } from "./components/utils";
 import { Pomodoro } from "@/app/components/pomodoro/pomodoro";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TimerList } from "./components/pomodoro/TimerList";
 import { TimerInstance } from "./lib/timer";
+import Link from "next/link";
 
 export default function Home() {
   
@@ -26,10 +26,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen min-w-full bg-slate-900 p-6">
+      hello
+      <Link href="/pomodoro"> Manage Timers </Link>
       <QueryClientProvider client={new QueryClient()}>
         <Pomodoro />
         <TimerList />
-      </QueryClientProvider> 
+      </QueryClientProvider>
+
     </main>
   );
 }

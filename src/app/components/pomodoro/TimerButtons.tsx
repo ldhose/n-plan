@@ -3,6 +3,7 @@ type TimerButtonProps = {
     breakButtonHandler: () => void,
     workButtonHandler: () => void,
     longBreakButtonHandler: () => void,
+    testButton: () => void,
 }
 
 export const TimerButtons =(timerButtonProps: TimerButtonProps) => {
@@ -11,7 +12,7 @@ export const TimerButtons =(timerButtonProps: TimerButtonProps) => {
             <button onClick={timerButtonProps.breakButtonHandler} >Short Break</button>
             <button onClick={timerButtonProps.workButtonHandler}> Work </button>
             <button onClick={timerButtonProps.longBreakButtonHandler}> Long Break </button>
-
+            <button onClick={timerButtonProps.testButton}>Test 5 s</button>
         </div>
     )
 }

@@ -1,18 +1,31 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
+import { notify } from "../Notification"
+import { TimerInstance } from "@/app/lib/timer";
+import { usePomodoroContext } from "../contexts/pomodoroContext";
 
-export const Timer = ({seconds, updateTimer}: {seconds: number, updateTimer: any }) => {
+export const Timer = () => {
+  
+  const timer = usePomodoroContext();
 
   useEffect(() => {
-    if (seconds !== null) {
+    if (timer !== null) {
       let id = setInterval(() =>{
-        if(seconds >0 ) {
-          updateTimer(seconds - 1)
+        if(timer.remainingSeconds >0 ) {
+          timer.remainingSeconds = timer.remainingSeconds - 1
         }
+        else if(!timer.notified) {
+        // const audio = new Audio("/timer-sound.mp3")
+          // audio.play()
+          // notify({text: "Timer finished"})
+          console.log("Setting notification to true")
+          timer.notified =true;
+        }
+        
       }, 1000);
       return () => clearInterval(id);
     }
-  },[seconds])
+  },[timer])
 
   return (
     <div>
@@ -21,7 +34,7 @@ export const Timer = ({seconds, updateTimer}: {seconds: number, updateTimer: any
         className="grid place-items-center h-64 w-64 bg-slate-800 rounded-full 
         sm:h-64 sm:w-64 md:h-96 md:w-96 m-auto mt-10"
       >
-        {seconds > 0 ? <span>{Math.ceil(seconds / 60)} : { seconds % 60}</span> : <span>No active timers {seconds}</span>  }
+        {timer.remainingSeconds > 0 ? <span>{Math.floor(timer.remainingSeconds / 60)} : { timer.remainingSeconds % 60}</span> : <span>No active timers {timer.text}</span>  }
       </div>
     </div>
   )
