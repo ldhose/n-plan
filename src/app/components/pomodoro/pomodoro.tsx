@@ -45,10 +45,7 @@ export const Pomodoro = () => {
     <div>
         <PomodoroContextProvider>
             <Timer />
-            <TimerButtons breakButtonHandler = {breakButtonHandler}
-                        longBreakButtonHandler={longBreakButtonHandler}
-                        workButtonHandler={workButtonHandler}
-                        testButton={testButton}/>
+            <TimerButtons />
         </PomodoroContextProvider>
 
     </div>

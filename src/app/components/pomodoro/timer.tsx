@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { notify } from "../Notification"
 import { TimerInstance } from "@/app/lib/timer";
-import { usePomodoroContext } from "../contexts/pomodoroContext";
+import { PomodoroContext } from "../contexts/pomodoroContext";
 
 export const Timer = () => {
   
-  const {timer, setTimer} = usePomodoroContext();
+  const {timer, setTimer} = useContext(PomodoroContext);
 
   useEffect(() => {
     if (timer !== null) {

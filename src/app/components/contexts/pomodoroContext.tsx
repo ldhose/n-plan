@@ -2,9 +2,13 @@
 import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 import { TimerInstance } from "@/app/lib/timer";
 
+export interface PomodoroContextI{
+    timer: TimerInstance,
+    setTimer: Dispatch<SetStateAction<TimerInstance>>
+}
 
 
-export const PomodoroContext = createContext<{timer: TimerInstance, setTimer: Dispatch<SetStateAction<TimerInstance>>}| undefined>(undefined)
+export const PomodoroContext = createContext<{timer: TimerInstance, setTimer: (timer: TimerInstance) => void}| undefined>(undefined)
 
 
 export default function PomodoroContextProvider({children, }: {children: React.ReactNode}) {
@@ -17,10 +21,9 @@ export default function PomodoroContextProvider({children, }: {children: React.R
             {children}
         </PomodoroContext.Provider>
     )
-
     
 }
-export const usePomodoroContext = () => {
+export function usePomodoroContext () {
     const timerInstance = useContext(PomodoroContext)
     if (timerInstance === undefined) {
         throw new Error("Please provide context for pomodoro subcomponents")
