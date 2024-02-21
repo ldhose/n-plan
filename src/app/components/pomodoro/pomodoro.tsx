@@ -7,6 +7,7 @@ import axios from "axios"
 import { TimerList } from "./TimerList"
 import { TimerInstance } from "@/app/lib/timer"
 import  PomodoroContextProvider from "../contexts/pomodoroContext"
+import { InputText } from "./InputText"
 
 
 
@@ -46,6 +47,7 @@ export const Pomodoro = () => {
         <PomodoroContextProvider>
             <Timer />
             <TimerButtons />
+            <InputText />
         </PomodoroContextProvider>
 
     </div>
